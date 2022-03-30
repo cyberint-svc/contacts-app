@@ -6,7 +6,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o bin/server ./cmd/server
 
 # copy the server binary from builder stage; run the server binary
-FROM alpine:latest AS runner
+FROM alpine:3.15.3 AS runner
 WORKDIR /bin
 COPY --from=builder /go/src/github.com/infobloxopen/atlas-contacts-app/bin/server .
 COPY pkg/pb/contacts.swagger.json /go/src/github.com/infobloxopen/atlas-contacts-app/www/swagger.json
